@@ -1,0 +1,50 @@
+﻿이미지 새로 생성하면시 실행할때에는 
+docker-compose up --build 옵션으로 할것
+이미지가 이미 생성되어 있을때에는 docker-compose up으로 하면 됨
+
+
+DB volume이 살아 있을 경우 변경된 DB 접속 아이디 비번 등 이 적용 안될수 있음
+아이디 비번 등은 초기 Volume 세팅할때 저장되므로 
+그래서 DB Volume 삭제 해주고 다시 실행
+docker volume ls 로 현재 볼륨 내용 확인
+docker voulme rm <볼륨이름> 으로 해당 볼륨 삭제
+
+도커 볼륨 전체 삭제
+docker volume rm $(docker volume ls -q)
+
+
+도커 컴포즈로 만든 이미지 전체를 하나의 큰 파일로 export
+
+
+docker save $(docker images --format '{{.Repository}}:{{.Tag}}') -o CEOdockerImage.tar
+이방법으로 해야 리포지터리명과 태그명이 그대로 옮겨짐
+아래 방법으로 하면 리포지터리 명령과 태그명이 none로 표시됨
+
+## docker save $(docker images -q) -o ./saveimage/CEOimages.tar
+
+docker load -i CEOdockerImage.tar
+
+
+기존 개발했던 폴더 ceo/와 개발환경 경로를 다르게 가져가서 에러남
+똑같이 ceo/ 내에 .yml 파일 및 py파일등을 넣어줘야 함
+
+postgre hostname = ceo_db_1 여기 앞의 이름이 폴더 이름을 따라감
+
+도커 이미지 일괄삭제
+docker rmi $(docker images -q)
+docker rmi $(docker images -q) -f
+
+도커 볼륨 정보
+docker volume ls
+
+도커 볼륨 일괄삭제
+docker volume rm $(docker volume ls -q)
+docker volume rm $(docker volume ls -q) -f
+
+캐시 사용안하고 빌드(이걸로 하면 Dockerfile에 정의된 이미지만 만듬)
+docker-compose build --no-cache
+
+도커컴포즈 컨테이너 일괄실행
+docker-compose up
+도커컴포즈 컨테이너 일괄정지
+docker-compose down
