@@ -8,7 +8,7 @@ from flask_restful import Resource, Api
 from flask_restful import reqparse
 import pymysql
 import pandas as pd
-from api1 import testFunc
+
 
 # def execute(query):
 #     pc.execute(query)

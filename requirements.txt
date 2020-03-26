@@ -18,5 +18,4 @@ flask-cors
 openpyxl
 ###############
 pymysql
-json
-urllib
+requests
