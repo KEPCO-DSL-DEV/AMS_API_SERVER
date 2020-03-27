@@ -16,13 +16,13 @@ import pandas as pd
 
 
 
-connection = pymysql.connect(host='10.41.179.169',
-                             user='kepco',
-                             password='power12#',
+connection = pymysql.connect(host='db',
+                             user='dsl',
+                             password='kepco1234!',
                              port=3306,
-                             db='silver_care',
+                             db='ams_api_server',
                              charset='utf8',
-                             #ssl={'ssl-mode': 'DISABLED'}
+                             ssl={'ssl-mode': 'DISABLED'}
                             
                              )
 
@@ -99,12 +99,12 @@ if __name__ == '__main__':
 def index():
     return 'Hello Flask'
 
-@app.route('/test', methods=['GET'])
-def test():
-    args1 = request.args['args1']
-    args2 = request.args['args2']
-    args3 = request.args['args3']
-    return testFunc(args1, args2,args3)
+# @app.route('/test', methods=['GET'])
+# def test():
+#     args1 = request.args['args1']
+#     args2 = request.args['args2']
+#     args3 = request.args['args3']
+#     return testFunc(args1, args2,args3)
 
 def index():
     return 'Hello Flask'

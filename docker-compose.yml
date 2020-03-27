@@ -4,24 +4,10 @@ volumes:
   flask_polls_data:
 
 services:
-  web:
-    build: .
-    command: flask run --host=0.0.0.0 --port=8000
-    ports:
-      - 8000:8000
-    environment:
-      - FLASK_APP=app.py
-
-    volumes:
-      - ./:/app/
-
-    depends_on: ###이 명령어를 쓰지 않을 경우에는 web services를 db services 아래에 기술해야 함
-      - db
-    #restart: always
   db:
     image: mysql:8
     ports:
-      - 3306:3306
+      - "127.0.0.1:3306:3306"
     env_file:
       - env.list
       ## password authentication failed for user 에러 날경우 docker volume 삭제 후 다시 실행
@@ -41,8 +27,23 @@ services:
       #- ./docker/data:/var/lib/postgresql/data #로컬컴퓨터디렉터리:컨테이너_속_디렉터리
   #docker volume ls
   #docker volume rm django_sample_db_dev
-#docker save $(docker images --format '{{.Repository}}:{{.Tag}}') -o allinone.tar
-#이방법으로 해야 리포지터리명과 태그명이 그대로 옮겨짐
-#아래 방법으로 하면 리포지터리 명령과 태그명이 none로 표시됨
+  #docker save $(docker images --format '{{.Repository}}:{{.Tag}}') -o allinone.tar
+  #이방법으로 해야 리포지터리명과 태그명이 그대로 옮겨짐
+  #아래 방법으로 하면 리포지터리 명령과 태그명이 none로 표시됨
 
-###### docker save $(docker images -q) -o ./saveimage/CEOimages.tar
+  ###### docker save $(docker images -q) -o ./saveimage/CEOimages.tar
+
+  web:
+    build: .
+    command: flask run --host=0.0.0.0 --port=8000
+    ports:
+      - 8000:8000
+    environment:
+      - FLASK_APP=app.py
+
+    volumes:
+      - ./:/app/
+
+    depends_on: ###이 명령어를 쓰지 않을 경우에는 web services를 db services 아래에 기술해야 함
+      - db
+    #restart: always
