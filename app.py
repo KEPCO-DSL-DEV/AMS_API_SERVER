@@ -70,30 +70,30 @@ CREATE TABLE teacher (
 app = Flask(__name__)
 api = Api(app)
 
-class CreateUser(Resource):
-    def get(self):
-    #def post(self):
-        try:
-            parser = reqparse.RequestParser()
-            parser.add_argument('email', type=str)
-            parser.add_argument('user_name', type=str)
-            parser.add_argument('password', type=str)
-            args = parser.parse_args()
+# class CreateUser(Resource):
+#     def get(self):
+#     #def post(self):
+#         try:
+#             parser = reqparse.RequestParser()
+#             parser.add_argument('email', type=str)
+#             parser.add_argument('user_name', type=str)
+#             parser.add_argument('password', type=str)
+#             args = parser.parse_args()
 
-            _userEmail = args['email']
-            _userName = args['user_name']
-            _userPassword = args['password']
-            # if _userName == "의택":
-            #     return "true"
-            # else:
-            #     return "false"
-            return {'Email': args['email'], 'UserName': args['user_name'], 'Password': args['password']}
-        except Exception as e:
-            return {'error': str(e)}
+#             _userEmail = args['email']
+#             _userName = args['user_name']
+#             _userPassword = args['password']
+#             # if _userName == "의택":
+#             #     return "true"
+#             # else:
+#             #     return "false"
+#             return {'Email': args['email'], 'UserName': args['user_name'], 'Password': args['password']}
+#         except Exception as e:
+#             return {'error': str(e)}
 
-api.add_resource(CreateUser, '/userinfo')
-if __name__ == '__main__':
-    app.run(debug=True)
+# api.add_resource(CreateUser, '/userinfo')
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
 @app.route('/')
 def index():
@@ -115,32 +115,32 @@ def info():
     id = request.args.get('id')
     return id
 
-# String 타입의 username 파라메터
-# http://localhost:5000/user/사용자명
-@app.route('/user/<username>')
-def show_user_profile(username):
-    # show the user profile for that user
-    return 'User %s' % username
+# # String 타입의 username 파라메터
+# # http://localhost:5000/user/사용자명
+# @app.route('/user/<username>')
+# def show_user_profile(username):
+#     # show the user profile for that user
+#     return 'User %s' % username
 
-# int 타입의 post_id 파라메터
-# http://localhost:5000/post/19
-@app.route('/post/<int:post_id>')
-def show_post(post_id):
-    # show the post with the given id, the id is an integer
-    return 'Post %d' % post_id
+# # int 타입의 post_id 파라메터
+# # http://localhost:5000/post/19
+# @app.route('/post/<int:post_id>')
+# def show_post(post_id):
+#     # show the post with the given id, the id is an integer
+#     return 'Post %d' % post_id
 
-# float 타입의 pi 파라메터
-# http://localhost:5000/circle/3.14
-@app.route('/circle/<float:pi>')
-def show_pi(pi):
-    # show the post with the given id, the id is an integer
-    return 'PI %f' % pi
+# # float 타입의 pi 파라메터
+# # http://localhost:5000/circle/3.14
+# @app.route('/circle/<float:pi>')
+# def show_pi(pi):
+#     # show the post with the given id, the id is an integer
+#     return 'PI %f' % pi
 
-# path 타입의 path 파라메터
-# http://localhost:5000/path/path/test/kkk/
-@app.route('/path/<path:path>')
-def show_path(path):
-    # show the post with the given id, the id is an integer
-    return 'path %s' % path
+# # path 타입의 path 파라메터
+# # http://localhost:5000/path/path/test/kkk/
+# @app.route('/path/<path:path>')
+# def show_path(path):
+#     # show the post with the given id, the id is an integer
+#     return 'path %s' % path
 
-#@app.route('/polls/questions/', methods=['GET', 'POST'])
+# #@app.route('/polls/questions/', methods=['GET', 'POST'])
