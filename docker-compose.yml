@@ -35,12 +35,11 @@ services:
 
   web:
     build: .
-    command:
-      - bash
-      - -c
-      - |
-        ./wait-for-it.sh db:3306 -t 15
-        flask run --host=0.0.0.0 --port=8000
+    image : ams_api_server_web:latest
+    command: >
+      sh -c "chmod +x ./wait-for-it.sh &&
+            ./wait-for-it.sh db:3306 -t 15 &&
+            flask run --host=0.0.0.0 --port=8000"        
     ports:
       - 8000:8000
     environment:
